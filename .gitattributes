@@ -1,0 +1,60 @@
+# Normalize line endings for text files
+* text=auto
+
+# Unity serialized assets should stay as text for diffs and merges
+*.cs text diff=csharp
+*.shader text
+*.compute text
+*.cginc text
+*.hlsl text
+*.json text
+*.xml text
+*.yaml text
+*.yml text
+*.txt text
+*.md text
+
+*.meta text
+*.unity text
+*.prefab text
+*.asset text
+*.mat text
+*.anim text
+*.controller text
+*.overrideController text
+*.playable text
+*.mask text
+*.physicsMaterial2D text
+*.physicsMaterial text
+*.guiskin text
+*.fontsettings text
+*.flare text
+*.renderTexture text
+*.terrainlayer text
+
+# Common binary assets
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.psd binary
+*.tga binary
+*.tif binary
+*.tiff binary
+*.fbx binary
+*.blend binary
+*.mb binary
+*.wav binary
+*.mp3 binary
+*.ogg binary
+*.mp4 binary
+*.mov binary
+*.dll binary
+*.exe binary
+*.a binary
+*.so binary
+*.dylib binary
+*.jar binary
+*.zip binary
+*.7z binary
+*.rar binary
