@@ -27,12 +27,31 @@ namespace LaoqiuParty.Board.Movement
             transform.position = tile.transform.position;
         }
 
+        public IEnumerator MoveToPosition(Vector3 position)
+        {
+            while (Vector3.Distance(transform.position, position) > 0.05f)
+            {
+                transform.position = Vector3.MoveTowards(
+                    transform.position,
+                    position,
+                    moveSpeed * Time.deltaTime);
+                yield return null;
+            }
+
+            transform.position = position;
+        }
+
         public void SnapToTile(BoardTile tile)
         {
             if (tile != null)
             {
                 transform.position = tile.transform.position;
             }
+        }
+
+        public void SnapToPosition(Vector3 position)
+        {
+            transform.position = position;
         }
     }
 }

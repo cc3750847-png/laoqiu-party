@@ -18,5 +18,10 @@ namespace LaoqiuParty.Board.Runtime
 
             return tiles[index];
         }
+
+        public void SetTiles(List<BoardTile> boardTiles)
+        {
+            tiles = boardTiles ?? new List<BoardTile>();
+        }
     }
 }
