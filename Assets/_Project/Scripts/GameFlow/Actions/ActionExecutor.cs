@@ -48,5 +48,15 @@ namespace LaoqiuParty.GameFlow.Actions
 
             return request.boolValue;
         }
+
+        public bool ResolveBooleanDecision(GameActionRequest request, bool fallbackValue)
+        {
+            if (request == null)
+            {
+                return fallbackValue;
+            }
+
+            return request.boolValue;
+        }
     }
 }

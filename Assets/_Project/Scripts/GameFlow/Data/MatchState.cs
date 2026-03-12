@@ -11,7 +11,9 @@ namespace LaoqiuParty.GameFlow.Data
         public int currentRound = 1;
         public int currentTurnIndex;
         public int maxRounds = 15;
+        public string latestHeadline = "Match Ready";
         public string latestMessage = "Match ready.";
+        public int latestMessageVersion;
         public List<PlayerRuntimeState> players = new();
         public List<PlayerRuntimeState> finalRanking = new();
 
@@ -42,11 +44,13 @@ namespace LaoqiuParty.GameFlow.Data
             currentRound++;
         }
 
-        public void SetMessage(string message)
+        public void SetMessage(string message, string headline = null)
         {
             if (!string.IsNullOrWhiteSpace(message))
             {
                 latestMessage = message;
+                latestHeadline = string.IsNullOrWhiteSpace(headline) ? latestHeadline : headline;
+                latestMessageVersion++;
             }
         }
 

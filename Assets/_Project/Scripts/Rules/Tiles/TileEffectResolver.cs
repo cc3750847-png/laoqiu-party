@@ -32,31 +32,31 @@ namespace LaoqiuParty.Rules.Tiles
             {
                 case BoardTileType.Reward:
                     player.coins += rewardCoins;
-                    message = $"{player.displayName} landed on Reward and gained {rewardCoins} coins.";
+                    message = $"{player.displayName} 落在奖励格，获得 {rewardCoins} 金币。";
                     break;
                 case BoardTileType.Trap:
                     player.coins = Mathf.Max(0, player.coins - trapCoins);
-                    message = $"{player.displayName} landed on Trap and lost {trapCoins} coins.";
+                    message = $"{player.displayName} 落在陷阱格，失去 {trapCoins} 金币。";
                     break;
                 case BoardTileType.Shop:
                     var shouldBuy = humanBuyDecision ?? player.coins >= shopPrice;
                     if (!CanAffordShop(player))
                     {
-                        message = $"{player.displayName} reached Shop but lacked coins.";
+                        message = $"{player.displayName} 到了商店，但金币不够。";
                     }
                     else if (shouldBuy)
                     {
                         player.coins -= shopPrice;
                         player.score += shopScoreReward;
-                        message = $"{player.displayName} bought {shopScoreReward} score at Shop for {shopPrice} coins.";
+                        message = $"{player.displayName} 在商店花了 {shopPrice} 金币，购买了 {shopScoreReward} 分。";
                     }
                     else
                     {
-                        message = $"{player.displayName} skipped Shop.";
+                        message = $"{player.displayName} 跳过了商店。";
                     }
                     break;
                 default:
-                    message = $"{player.displayName} landed on {tile.TileType}.";
+                    message = $"{player.displayName} 落在普通格。";
                     break;
             }
 

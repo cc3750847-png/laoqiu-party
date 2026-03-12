@@ -127,6 +127,52 @@ namespace LaoqiuParty.Agents.Runtime
             };
         }
 
+        public GameActionRequest BuildPaidRouteAction(PlayerRuntimeState self, BoardTile currentTile)
+        {
+            var canPay = currentTile != null && self != null && self.coins >= currentTile.PaidChoiceCost;
+            var wantsPaidRoute = canPay && archetype switch
+            {
+                AgentArchetype.Scorer => true,
+                AgentArchetype.Greedy => currentTile.PaidChoiceCost <= 2,
+                AgentArchetype.Cautious => false,
+                AgentArchetype.Chaotic => Random.value > 0.35f,
+                _ => false
+            };
+
+            return new GameActionRequest
+            {
+                actionType = GameActionType.PaidRouteDecision,
+                playerId = self.playerId,
+                boolValue = wantsPaidRoute
+            };
+        }
+
+        public GameActionRequest BuildUseItemAction(MatchState matchState, PlayerRuntimeState self)
+        {
+            if (self == null || self.inventory == null || !self.inventory.HasItem("steal_coin"))
+            {
+                return null;
+            }
+
+            var shouldUseItem = archetype switch
+            {
+                AgentArchetype.Greedy => true,
+                AgentArchetype.Scorer => matchState != null && self.coins < 5,
+                AgentArchetype.Cautious => false,
+                AgentArchetype.Chaotic => Random.value > 0.4f,
+                _ => false
+            };
+
+            return shouldUseItem
+                ? new GameActionRequest
+                {
+                    actionType = GameActionType.UseItem,
+                    playerId = self.playerId,
+                    boolValue = true
+                }
+                : null;
+        }
+
         private PlayerRuntimeState ChooseTarget(MatchState matchState, PlayerRuntimeState self)
         {
             return matchState.players

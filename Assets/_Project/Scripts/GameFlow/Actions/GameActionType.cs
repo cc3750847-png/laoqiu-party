@@ -4,6 +4,8 @@ namespace LaoqiuParty.GameFlow.Actions
     {
         Roll,
         ChoosePath,
-        ShopDecision
+        ShopDecision,
+        UseItem,
+        PaidRouteDecision
     }
 }

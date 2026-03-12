@@ -85,7 +85,7 @@ namespace LaoqiuParty.Board.Runtime
                 _ => 0.35f
             };
 
-            return tile.transform.position + new Vector3(xOffset, 0.8f, zOffset);
+            return tile.transform.position + new Vector3(xOffset, 0.56f, zOffset);
         }
 
         private BoardTile GetNextTile(BoardTile currentTile, int currentIndex, System.Func<BoardTile, BoardTile> nextTileSelector)

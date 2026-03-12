@@ -40,8 +40,8 @@ namespace LaoqiuParty.Director.Runtime
             }
 
             Debug.Log(
-                $"[Director] Round {matchState.currentRound}, Turn {matchState.currentTurnIndex}, " +
-                $"Active={activePlayer.displayName}, Leader={context.Leader?.displayName}, Last={context.LastPlace?.displayName}");
+                $"[Director] 回合 {matchState.currentRound}, 玩家序 {matchState.currentTurnIndex}, " +
+                $"当前={activePlayer.displayName}, 领先={context.Leader?.displayName}, 落后={context.LastPlace?.displayName}");
         }
 
         private void ApplyRoundEvent(DirectorContext context)
@@ -54,21 +54,23 @@ namespace LaoqiuParty.Director.Runtime
             }
 
             string message;
+            string headline;
             if (leader.playerId != lastPlace.playerId && leader.coins >= leaderCoinPenalty)
             {
                 leader.coins -= leaderCoinPenalty;
                 lastPlace.coins += lastPlaceCoinBoost;
+                headline = "导演裁定";
                 message =
-                    $"Director event: {leader.displayName} is taxed {leaderCoinPenalty} coins. " +
-                    $"{lastPlace.displayName} gets {lastPlaceCoinBoost} comeback coins.";
+                    $"{leader.displayName} 被系统盯上，支付 {leaderCoinPenalty} 金币。{lastPlace.displayName} 获得 {lastPlaceCoinBoost} 金币补偿。";
             }
             else
             {
                 lastPlace.coins += lastPlaceCoinBoost;
-                message = $"Director event: {lastPlace.displayName} gets {lastPlaceCoinBoost} comeback coins.";
+                headline = "补偿机制";
+                message = $"{lastPlace.displayName} 获得导演补偿的 {lastPlaceCoinBoost} 金币。";
             }
 
-            matchState.SetMessage(message);
+            matchState.SetMessage(message, headline);
             Debug.Log($"[DirectorEvent] {message}");
         }
     }
